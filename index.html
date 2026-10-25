@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFCF6">
+<title>2026 東京吉八朝聖旅 🐥🐹🐱</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#FFFCF6;--ink:#3E3A39;--pink:#F2A497;--yellow:#F6D27A;
+ --blue:#A8D3E6;--green:#B9DAA5;--white:#fffefa;--muted:#817873;
+ --line:3px solid var(--ink);--radius:25px;--shadow:5px 5px 0 var(--ink);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Huninn","Noto Sans TC",sans-serif;line-height:1.65}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.topbar{position:fixed;z-index:20;inset:0 0 auto;background:rgba(255,252,246,.96);border-bottom:var(--line);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:1rem;font-weight:bold;white-space:nowrap}
+.nav{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+.nav a{white-space:nowrap;padding:6px 11px;border:2px solid var(--ink);border-radius:999px;background:var(--white);font-size:.85rem}
+.nav a:hover,.nav a:focus{background:var(--yellow)}
+main{max-width:1000px;margin:auto;padding:85px 16px 48px}
+section{margin:30px 0}
+.card{background:var(--white);border:var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.hero{position:relative;overflow:hidden;background:#fff4e8;padding:28px 22px 24px;min-height:360px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:10px;align-items:center}
+.eyebrow{display:inline-block;border:2px solid var(--ink);border-radius:999px;background:var(--green);padding:4px 12px;font-size:.9rem}
+h1{font-size:clamp(2rem,7vw,4.2rem);line-height:1.12;margin:15px 0 12px;letter-spacing:.02em}
+h2{font-size:1.55rem;margin:0 0 16px}
+h3{font-size:1.12rem;margin:0 0 8px}
+p{margin:7px 0}
+.hero p{font-size:1.02rem}
+.countdown{display:inline-flex;align-items:center;gap:8px;margin-top:15px;padding:9px 14px;border:2px solid var(--ink);border-radius:16px;background:var(--yellow);font-weight:bold}
+.hero-art{width:100%;max-height:280px}
+.doodle{transform-origin:center;animation:float 3.8s ease-in-out infinite}
+.doodle.delay{animation-delay:-1.5s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:15px}
+.section-head .icon{display:grid;place-items:center;width:44px;height:44px;border:var(--line);border-radius:15px;background:var(--yellow);font-size:1.4rem;flex-shrink:0}
+.small-note{font-size:.9rem;color:var(--muted)}
+.flight-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flight{position:relative;padding:18px;border:var(--line);border-radius:20px;background:#fff}
+.flight.out{background:#fff0ed}.flight.back{background:#edf7fb}
+.flight-label{display:flex;justify-content:space-between;gap:8px;font-weight:bold}
+.flight-code{font-size:1.4rem;margin:9px 0 2px}
+.flight-route{display:flex;align-items:center;gap:9px;margin:9px 0}
+.plane-line{height:3px;background:var(--ink);flex:1;position:relative}
+.plane-line:after{content:"✈";position:absolute;left:45%;top:-16px;background:inherit;font-size:1rem;padding:0 3px}
+.pill{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:3px 9px;font-size:.82rem;background:var(--yellow);margin:2px 3px 2px 0}
+.pill.pink{background:#f9d4ce}.pill.blue{background:#d8edf6}.pill.green{background:#e1f0d7}
+.date-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.date-tab{border:var(--line);border-radius:17px;background:#fff;padding:10px 5px;text-align:center;transition:transform .18s,background .18s;min-width:0}
+.date-tab span{display:block;font-size:.76rem;color:var(--muted)}
+.date-tab strong{font-size:1.02rem}
+.date-tab[aria-selected="true"]{background:var(--pink);box-shadow:3px 3px 0 var(--ink);transform:translateY(-3px)}
+.day-panel{display:none;animation:pop .28s ease-out}
+.day-panel.active{display:block}
+@keyframes pop{0%{opacity:.5;transform:scale(.985)}70%{transform:scale(1.01)}100%{opacity:1;transform:scale(1)}}
+.day-banner{border:var(--line);border-radius:20px;padding:15px 17px;background:#fff2d7;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.day-banner .big-emoji{font-size:2rem}
+.timeline{position:relative;margin-left:10px;padding-left:24px}
+.timeline:before{content:"";position:absolute;left:4px;top:7px;bottom:12px;width:4px;background:var(--ink);border-radius:5px}
+.stop{position:relative;margin:0 0 18px;padding:15px 16px;border:2px solid var(--ink);border-radius:18px;background:#fff}
+.stop:before{content:"";position:absolute;left:-28px;top:22px;width:13px;height:13px;background:var(--pink);border:3px solid var(--ink);border-radius:50%}
+.stop:nth-child(2):before{background:var(--yellow)}.stop:nth-child(3):before{background:var(--blue)}.stop:nth-child(4):before{background:var(--green)}
+.stop-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:5px}
+.time{font-weight:bold;background:var(--ink);color:var(--paper);padding:3px 9px;border-radius:8px;font-size:.88rem}
+.must{background:var(--pink);border:2px solid var(--ink);padding:1px 8px;border-radius:999px;font-size:.76rem;font-weight:bold}
+.transit{font-size:.78rem;padding:2px 8px;border-radius:999px;border:1.5px solid var(--ink);background:var(--blue)}
+.transit.walk{background:var(--green)}.transit.note{background:var(--yellow)}
+.stop h3{margin:4px 0}
+.stop p{font-size:.94rem}
+.inline-art{float:right;width:65px;height:65px;margin:0 0 6px 10px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.check-card{background:#fff4ef}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{padding:9px 0;border-bottom:1px dashed #b8aaa1;display:flex;gap:10px;align-items:flex-start}
+.checklist li:last-child{border-bottom:0}
+.checklist input{appearance:none;flex:0 0 22px;width:22px;height:22px;border:2px solid var(--ink);border-radius:6px;background:white;margin:3px 0 0;display:grid;place-items:center}
+.checklist input:checked{background:var(--green)}
+.checklist input:checked:after{content:"✓";font-weight:bold;font-size:16px}
+.checklist input:checked+label{text-decoration:line-through;color:var(--muted)}
+.checklist label{flex:1;cursor:pointer}
+.progress{height:10px;border:2px solid var(--ink);border-radius:99px;overflow:hidden;margin:12px 0 5px;background:white}
+.progress-bar{height:100%;width:0;background:var(--green);transition:width .2s}
+.lodging{background:#eef7e9}
+.lodging-grid{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.lodging-art{width:130px;max-width:100%}
+.reminder{background:#fff0ed}
+.reminder strong{background:var(--yellow);padding:2px 5px;border-radius:5px}
+.footer{text-align:center;color:var(--muted);font-size:.9rem;padding:20px 0 5px}
+footer .tiny{font-size:1.5rem;letter-spacing:.3em}
+@media(max-width:650px){
+ .topbar{align-items:flex-start;flex-direction:column;padding:8px 12px;gap:6px}
+ .brand{font-size:.93rem}.nav{width:100%;padding-bottom:2px}
+ main{padding:115px 12px 30px}
+ .hero{padding:23px 17px}
+ .hero-grid{grid-template-columns:1fr;gap:0}
+ .hero-art{max-height:205px;max-width:370px;display:block;margin:0 auto}
+ .flight-grid,.two-col{grid-template-columns:1fr}
+ .date-tabs{gap:5px}.date-tab{padding:8px 2px;border-width:2px;border-radius:13px}
+ .date-tab strong{font-size:.92rem}.date-tab span{font-size:.68rem}
+ .card{padding:16px}
+ .lodging-grid{grid-template-columns:1fr 90px}
+ .lodging-art{width:90px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#home">🐥 吉八東京小旅行</a>
+  <nav class="nav" aria-label="主要選單">
+    <a href="#flights">航班</a><a href="#schedule">每日行程</a><a href="#checklist">行前準備</a><a href="#stay">住宿</a>
+  </nav>
+</header>
+<main>
+<section id="home" class="hero card">
+ <div class="hero-grid">
+  <div>
+   <span class="eyebrow">TOKYO · 2026.12.06—12.10</span>
+   <h1>2026 東京<br>吉八朝聖旅<span style="color:#d87568">！</span></h1>
+   <p>🐥 🐹 🐱 和喜歡的人一起，<br>把東京的可愛和冬日風景收集起來。</p>
+   <div class="countdown">🗓️ <span id="countdown">正在計算出發倒數…</span></div>
+  </div>
+  <svg class="hero-art" viewBox="0 0 360 280" role="img" aria-label="東京鐵塔、電車與三隻可愛旅伴插畫">
+   <path d="M20 232 Q85 218 125 232 T235 229 T345 232" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+   <g class="doodle">
+    <path d="M40 130 L72 42 L103 130Z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M52 95H91M59 76H84M47 113H97M65 61H80" stroke="#3E3A39" stroke-width="3"/>
+    <path d="M57 130L72 42L87 130M49 130H95" fill="none" stroke="#3E3A39" stroke-width="3"/>
+    <rect x="48" y="130" width="49" height="8" rx="3" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+   </g>
+   <g class="doodle delay" transform="translate(115 106)">
+    <rect x="0" y="38" width="120" height="76" rx="17" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+    <path d="M7 45L30 20H89L113 45" fill="#fffefa" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="17" y="52" width="25" height="23" rx="5" fill="#fffefa" stroke="#3E3A39" stroke-width="2"/>
+    <rect x="49" y="52" width="25" height="23" rx="5" fill="#fffefa" stroke="#3E3A39" stroke-width="2"/>
+    <rect x="81" y="52" width="25" height="23" rx="5" fill="#fffefa" stroke="#3E3A39" stroke-width="2"/>
+    <circle cx="27" cy="91" r="9" fill="#3E3A39"/><circle cx="94" cy="91" r="9" fill="#3E3A39"/>
+    <path d="M10 82H110" stroke="#3E3A39" stroke-width="3"/>
+   </g>
+   <g class="doodle" transform="translate(223 105)">
+    <ellipse cx="44" cy="78" rx="40" ry="43" fill="#fffefa" stroke="#3E3A39" stroke-width="3"/>
+    <path d="M18 43Q-1 1 22 13Q39 17 39 39M54 39Q60 1 75 12Q89 28 69 47" fill="#fffefa" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="31" cy="74" rx="3" ry="5" fill="#3E3A39"/><ellipse cx="57" cy="74" rx="3" ry="5" fill="#3E3A39"/>
+    <path d="M39 84Q44 91 49 84" fill="none" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="21" cy="84" rx="7" ry="4" fill="#F2A497"/><ellipse cx="67" cy="84" rx="7" ry="4" fill="#F2A497"/>
+    <path d="M25 116Q43 126 62 115" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+   </g>
+   <g fill="#F6D27A" stroke="#3E3A39" stroke-width="2">
+    <path d="M295 38l5 12 12 1-9 8 3 12-11-7-10 7 3-12-9-8 12-1z"/>
+    <path d="M132 34l3 8 8 1-6 5 2 8-7-5-7 5 2-8-6-5 8-1z"/>
+   </g>
+   <path d="M18 186q8-14 16 0q8 14 16 0" fill="none" stroke="#F2A497" stroke-width="4" stroke-linecap="round"/>
+   <text x="180" y="260" font-size="14" text-anchor="middle" fill="#3E3A39">東京散步中… ♡</text>
+  </svg>
+ </div>
+</section>
+
+<section id="flights">
+ <div class="section-head"><span class="icon">✈️</span><div><h2>航班資訊</h2><div class="small-note">台灣時間／日本時間請留意時差一小時</div></div></div>
+ <div class="flight-grid">
+  <article class="flight out">
+   <div class="flight-label"><span>去程 · 12/6（日）</span><span class="pill pink">虎航 IT202</span></div>
+   <div class="flight-code">TPE → NRT</div><div>台灣桃園 T1 → 日本成田 T2</div>
+   <div class="flight-route"><strong>15:35 🇹🇼</strong><div class="plane-line"></div><strong>19:35 🇯🇵</strong></div>
+   <span class="pill">手提 10 kg</span><span class="pill">托運 20 kg</span>
+   <p class="small-note">抵達後前往新小岩，預計約 21:00 到住宿。</p>
+  </article>
+  <article class="flight back">
+   <div class="flight-label"><span>回程 · 12/10（四）</span><span class="pill blue">虎航 IT201</span></div>
+   <div class="flight-code">NRT → TPE</div><div>日本成田 T2 → 台灣桃園 T1</div>
+   <div class="flight-route"><strong>11:25 🇯🇵</strong><div class="plane-line"></div><strong>14:45 🇹🇼</strong></div>
+   <span class="pill">BB 托運 25 kg</span><span class="pill">小莫托運 20 kg</span>
+   <p class="small-note">預計 06:00 離開住宿，目標 08:30 抵達機場。</p>
+  </article>
+ </div>
+</section>
+
+<section id="schedule">
+ <div class="section-head"><span class="icon">🗓️</span><div><h2>每日行程</h2><div class="small-note">點選日期切換行程 · 時間為預估，可依現場狀況調整</div></div></div>
+ <div class="date-tabs" role="tablist" aria-label="選擇日期">
+  <button class="date-tab" role="tab" aria-selected="false" aria-controls="day1" data-day="day1"><span>日 DAY 1</span><strong>12/6</strong></button>
+  <button class="date-tab" role="tab" aria-selected="true" aria-controls="day2" data-day="day2"><span>一 DAY 2</span><strong>12/7</strong></button>
+  <button class="date-tab" role="tab" aria-selected="false" aria-controls="day3" data-day="day3"><span>二 DAY 3</span><strong>12/8</strong></button>
+  <button class="date-tab" role="tab" aria-selected="false" aria-controls="day4" data-day="day4"><span>三 DAY 4</span><strong>12/9</strong></button>
+  <button class="date-tab" role="tab" aria-selected="false" aria-controls="day5" data-day="day5"><span>四 DAY 5</span><strong>12/10</strong></button>
+ </div>
+
+ <article class="day-panel" id="day1" role="tabpanel">
+  <div class="day-banner"><div><h2>Day 1｜出發日</h2><p>先平安抵達東京，晚上輕鬆補給就好。</p></div><span class="big-emoji">🌙</span></div>
+  <div class="timeline">
+   <div class="stop"><div class="stop-top"><span class="time">15:35–19:35</span><span class="transit">✈️ 飛機</span></div><h3>桃園 → 成田</h3><p>搭乘虎航 IT202，抵達成田第二航廈。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">19:35–21:00</span><span class="transit">🚆 電車</span></div><h3>成田機場 → 新小岩</h3><p>依當日班次確認路線與末班車；預留入境、領行李及轉乘時間。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">21:00–22:30</span><span class="transit walk">🚶 附近散步</span></div><h3>住宿 Check-in、晚餐、唐吉訶德</h3><p>買水、早餐、零食和旅行用品。第一晚不再排其他景點。</p></div>
+  </div>
+ </article>
+
+ <article class="day-panel active" id="day2" role="tabpanel">
+  <div class="day-banner"><div><h2>Day 2｜吉伊卡哇朝聖日</h2><p>池袋可愛巡禮 → 淺草夜景 → 晴空塔</p></div><span class="big-emoji">🐰</span></div>
+  <div class="timeline">
+   <div class="stop"><div class="stop-top"><span class="time">08:45</span><span class="transit">🚆 新小岩出發</span></div><h3>前往池袋</h3><p>早餐後出門，預留轉乘與步行時間。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">10:00–12:30</span><span class="must">必去</span><span class="transit note">🎟️ 已有預約時段</span></div><h3>Chiikawa Park｜池袋 Sunshine City</h3><p>入場票時段為 10:00–10:20，建議提早抵達入口。展區、拍照、限定商品預留約 2–2.5 小時。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">12:30–14:00</span><span class="transit walk">🍜 午餐／逛街</span></div><h3>吉伊卡哇拉麵・池袋周邊</h3><p>想吃 Chiikawa Ramen 的話，先確認當日營業、排隊及入店規則；再逛 Sunshine City 或周邊商店。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">14:00–15:00</span><span class="transit">🚆 池袋 → 淺草</span></div><h3>移動與休息</h3><p>若有其他吉伊卡哇店想逛，請優先安排在池袋；留意別因購物延誤後續預約。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">16:00–18:00</span><span class="must">必去</span><span class="transit walk">🏮 散步拍照</span></div><h3>雷門・仲見世通・淺草寺</h3><p>傍晚開始散步拍照。商店可能陸續打烊，夜間以雷門、寺院外觀和街景為主。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">18:30–20:00</span><span class="must">必去</span><span class="transit note">🎟️ 確認門票時間</span></div><h3>東京晴空塔｜350 樓天望甲板</h3><p>按已購門票時間入場，欣賞東京夜景；預留上樓、拍照和下樓時間。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">20:00–21:30</span><span class="transit">🚆 回新小岩</span></div><h3>回住宿休息</h3><p>這天走路很多，建議回程不再加點。</p></div>
+  </div>
+ </article>
+
+ <article class="day-panel" id="day3" role="tabpanel">
+  <div class="day-banner"><div><h2>Day 3｜市區周邊逛街日</h2><p>神宮綠意、原宿甜點、銀杏與東京夜景。</p></div><span class="big-emoji">🍂</span></div>
+  <div class="timeline">
+   <div class="stop"><div class="stop-top"><span class="time">09:00–10:00</span><span class="transit">🚆 前往原宿</span></div><h3>新小岩 → 明治神宮</h3><p>建議先確認當日開門時間及交通轉乘。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">10:00–11:30</span><span class="must">必去</span><span class="transit walk">🌿 散步</span></div><h3>明治神宮</h3><p>走林蔭參道、參拜與拍照。銀杏狀況依當年天氣而異。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">11:30–12:30</span><span class="transit">🚆／🚶 移動</span></div><h3>神宮外苑銀杏並木</h3><p>從明治神宮前往外苑需要移動時間；若想拍銀杏，建議先確認當日葉況並預留約 45–60 分鐘交通與散步時間。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">12:30–13:00</span><span class="transit walk">🍽️ 午餐</span></div><h3>簡單午餐／前往原宿</h3><p>原本計畫約 13:00 前往秋葉原與元會合，這段時間會比較緊，建議把外苑停留時間控制好。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">13:00–15:00</span><span class="must">必去</span><span class="transit">🚆 前往秋葉原</span></div><h3>秋葉原與元會合・壽喜燒・逛街</h3><p>壽喜燒餐廳建議先訂位；確認會合時間、店名及最近車站。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">15:00–17:00</span><span class="transit">🚆 市區移動</span></div><h3>前往六本木</h3><p>預留交通與休息時間。若要同日去東京鐵塔、澀谷，建議每站只安排重點拍照。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">17:00–18:00</span><span class="must">必去</span><span class="transit walk">✨ 夜間點燈</span></div><h3>六本木點燈</h3><p>冬季點燈很適合拍照，實際亮燈時間以官方公告為準。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">18:00–19:00</span><span class="transit">🚶／🚆 移動</span></div><h3>東京鐵塔周邊</h3><p>以外觀拍照為主；若要登塔，需另留入場時間。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">19:00–21:00</span><span class="must">必去</span><span class="transit note">🎟️ 門票需預約</span></div><h3>澀谷夜景・奶茶時間</h3><p>Shibuya Sky 門票預計於台灣時間 11/23 23:00 開賣（請以官方售票頁公告為準）。若買到票，依票券時間安排；六本木＋東京鐵塔＋澀谷同晚會較緊湊，必要時可刪減其中一站。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">21:00 之後</span><span class="transit">🚆 回新小岩</span></div><h3>回住宿休息</h3><p>隔天分頭行動，記得先充電、整理隨身包。</p></div>
+  </div>
+ </article>
+
+ <article class="day-panel" id="day4" role="tabpanel">
+  <div class="day-banner"><div><h2>Day 4｜分別行動日</h2><p>各自去喜歡的地方，晚上再交換今天的故事。</p></div><span class="big-emoji">🪄</span></div>
+  <div class="timeline">
+   <div class="stop"><div class="stop-top"><span class="time">10:00 起</span><span class="must">小莫必去</span><span class="transit note">🎟️ 指定入場時間</span></div><h3>哈利波特影城｜Studio Tour Tokyo</h3><p>按票券上的入場時間前往，建議預留 4–6 小時；若很喜歡周邊和展區，可能逛到下午 4–5 點。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">白天</span><span class="transit walk">☕ BB 自由行</span></div><h3>木木咖啡廳＋新宿逛街</h3><p>咖啡廳地址與營業時間出發前再確認，安排一段悠閒的咖啡時間。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">16:00–17:00</span><span class="transit">📍 新宿會合</span></div><h3>新宿集合</h3><p>提前確認會合出口與聯絡方式，避免在大站裡找不到彼此。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">晚上</span><span class="transit walk">🍽️ 晚餐</span></div><h3>豬排晚餐 → 回新小岩</h3><p>若有指定店家，建議先確認營業時間或訂位。回住宿後整理行李，為隔天早起做準備。</p></div>
+  </div>
+ </article>
+
+ <article class="day-panel" id="day5" role="tabpanel">
+  <div class="day-banner"><div><h2>Day 5｜回國收假日</h2><p>不排景點，平安到機場、慢慢買伴手禮。</p></div><span class="big-emoji">🧳</span></div>
+  <div class="timeline">
+   <div class="stop"><div class="stop-top"><span class="time">06:00</span><span class="transit">🚆 預計出發</span></div><h3>新小岩 → 成田機場</h3><p>搭車前確認當日首班車、轉乘及票價；不要只依賴單一班次，建議預先查好備用路線。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">08:30 前後</span><span class="must">預留緩衝</span><span class="transit note">🧳 報到／行李</span></div><h3>成田第二航廈</h3><p>預留報到、托運、安檢及出境時間。退稅制度與機場流程請依出發當日官方指示確認。</p></div>
+   <div class="stop"><div class="stop-top"><span class="time">11:25–14:45</span><span class="transit">✈️ IT201</span></div><h3>成田 → 桃園</h3><p>登機前最後檢查護照、登機證、手機與購物戰利品！</p></div>
+  </div>
+ </article>
+</section>
+
+<section id="checklist">
+ <div class="section-head"><span class="icon">👜</span><div><h2>行前準備清單</h2><div class="small-note">勾選狀態會保存在這台裝置的瀏覽器中。</div></div></div>
+ <div class="two-col">
+  <div class="card check-card">
+   <h3>📱 出發前必備</h3>
+   <ul class="checklist" id="todo-main">
+    <li><input id="t1" type="checkbox"><label for="t1">西瓜卡（Suica）充值／確認手機交通卡</label></li>
+    <li><input id="t2" type="checkbox"><label for="t2">eSIM 安裝、啟用方式確認（五天方案）</label></li>
+    <li><input id="t3" type="checkbox"><label for="t3">Visit Japan Web 入境資料填寫</label></li>
+    <li><input id="t4" type="checkbox"><label for="t4">日幣、台幣現金與信用卡備妥</label></li>
+    <li><input id="t5" type="checkbox"><label for="t5">下載日本旅遊 App、離線地圖與翻譯工具</label></li>
+    <li><input id="t6" type="checkbox"><label for="t6">護照、機票、住宿訂單與門票截圖備份</label></li>
+    <li><input id="t7" type="checkbox"><label for="t7">確認行動電源、充電線、轉接需求</label></li>
+   </ul>
+   <div class="progress"><div class="progress-bar" id="progress-bar"></div></div><div class="small-note" id="progress-text">已完成 0 / 7 項</div>
+  </div>
+  <div class="card reminder">
+   <h3>🎟️ 門票與時間提醒</h3>
+   <ul class="checklist">
+    <li><input id="t8" type="checkbox"><label for="t8">Chiikawa Park：12/7 10:00–10:20 入場票</label></li>
+    <li><input id="t9" type="checkbox"><label for="t9">晴空塔 350 樓：確認已購票時段與入場口</label></li>
+    <li><input id="t10" type="checkbox"><label for="t10">哈利波特影城：確認 12/9 票券入場時間</label></li>
+    <li><input id="t11" type="checkbox"><label for="t11">Chiikawa Bakery：確認預約／現場入場規則</label></li>
+    <li><input id="t12" type="checkbox"><label for="t12">Shibuya Sky：設定 11/23 23:00（台灣時間）提醒</label></li>
+    <li><input id="t13" type="checkbox"><label for="t13">確認壽喜燒、豬排店及木木咖啡廳資訊</label></li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<section id="stay">
+ <div class="section-head"><span class="icon">🏠</span><div><h2>住宿資訊</h2><div class="small-note">東京東側的旅行基地</div></div></div>
+ <div class="card lodging">
+  <div class="lodging-grid">
+   <div>
+    <h3>新小岩住宿</h3>
+    <p>東京都葛飾區新小岩 3-3-1<br>Katsushika City, Tokyo, Japan</p>
+    <p><span class="pill green">🚶 JR 新小岩站步行約 8 分鐘</span><span class="pill blue">🚆 成田機場約 70 分鐘（預估）</span></p>
+    <p class="small-note">出發前再次確認住宿地址、入住方式、最近車站出口及機場交通班次。</p>
+   </div>
+   <svg class="lodging-art" viewBox="0 0 140 140" role="img" aria-label="可愛小房子插畫">
+    <path d="M18 64L70 20L122 64" fill="#F2A497" stroke="#3E3A39" stroke-width="4" stroke-linejoin="round"/>
+    <rect x="29" y="61" width="82" height="62" rx="7" fill="#fffefa" stroke="#3E3A39" stroke-width="4"/>
+    <rect x="43" y="76" width="22" height="23" rx="4" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+    <rect x="77" y="76" width="22" height="23" rx="4" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+    <rect x="61" y="94" width="19" height="29" rx="4" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+    <path d="M15 124H125" stroke="#3E3A39" stroke-width="4" stroke-linecap="round"/>
+    <path d="M110 35q-8-17 3-17q11 0 3 17" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3"/>
+   </svg>
+  </div>
+ </div>
+</section>
+
+<section class="card" style="background:#fff2d7">
+ <h2>💡 行程小提醒</h2>
+ <p>• 12/8 行程包含明治神宮、外苑、秋葉原、六本木、東京鐵塔與澀谷，移動距離較長；建議視體力刪減一站，並把 Shibuya Sky 票券時間當作固定錨點。</p>
+ <p>• 12/7 的淺草與晴空塔安排可行，但請依晴空塔門票時間調整淺草停留；若票券是 18:30 入場，建議約 18:00 從淺草出發。</p>
+ <p>• 日本電車時刻、景點營業時間與售票規則可能變動，出發前再用官方資訊確認。</p>
+</section>
+<footer class="footer"><div class="tiny">🐥 🐹 🐱</div><p>東京吉八朝聖旅 · 2026.12.06—12.10</p><p>帶著可愛出發，裝滿回憶回家 ♡</p></footer>
+</main>
+<script>
+const tabs=[...document.querySelectorAll('.date-tab')];
+const panels=[...document.querySelectorAll('.day-panel')];
+tabs.forEach(tab=>tab.addEventListener('click',()=>{
+ tabs.forEach(t=>t.setAttribute('aria-selected',String(t===tab)));
+ panels.forEach(p=>p.classList.toggle('active',p.id===tab.dataset.day));
+}));
+const departure=new Date('2026-12-06T15:35:00+08:00');
+function updateCountdown(){
+ const now=new Date(), diff=departure-now, el=document.getElementById('countdown');
+ if(diff<=0){el.textContent='東京旅行時間到！一路平安 ♡';return}
+ const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000);
+ el.textContent=`距離出發還有 ${days} 天 ${hours} 小時 ${mins} 分`;
+}
+updateCountdown();setInterval(updateCountdown,60000);
+const boxes=[...document.querySelectorAll('.checklist input[type="checkbox"]')];
+boxes.forEach(box=>{
+ const saved=localStorage.getItem('tokyo-trip-'+box.id);
+ if(saved!==null)box.checked=saved==='true';
+ box.addEventListener('change',()=>{localStorage.setItem('tokyo-trip-'+box.id,box.checked);updateProgress()});
+});
+function updateProgress(){
+ const main=[...document.querySelectorAll('#todo-main input')], done=main.filter(x=>x.checked).length;
+ document.getElementById('progress-bar').style.width=(done/main.length*100)+'%';
+ document.getElementById('progress-text').textContent=`已完成 ${done} / ${main.length} 項`;
+}
+updateProgress();
+</script>
+</body>
+</html>
